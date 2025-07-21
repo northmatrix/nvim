@@ -27,10 +27,4 @@ return {
       -- add any options here
     },
   },
-  {
-    'edluffy/hologram.nvim',
-    config = function()
-      require('hologram').setup { auto_display = true }
-    end,
-  },
 }
