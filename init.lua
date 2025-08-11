@@ -769,7 +769,6 @@ require('lazy').setup({
           return {
             timeout_ms = 500,
             lsp_format = 'fallback',
-            async = true,
           }
         end
       end,
@@ -906,11 +905,14 @@ require('lazy').setup({
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
+        transparent = true,
         styles = {
-          comments = { italic = false }, -- Disable italics in comments
+          comments = { italic = true }, -- Disable italics in comments
         },
         on_colors = function(colors)
           --colors.bg = '#1a1b26'
+          --colors.bg = '#15161e'
+          --colors.bg = '#100000'
         end,
       }
 
