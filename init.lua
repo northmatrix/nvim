@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 -- vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
---vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -905,13 +905,13 @@ require('lazy').setup({
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
-        transparent = true,
+        --transparent = true,
         styles = {
           comments = { italic = true }, -- Disable italics in comments
         },
         on_colors = function(colors)
           --colors.bg = '#1a1b26'
-          --colors.bg = '#15161e'
+          colors.bg = '#15161e'
           --colors.bg = '#100000'
         end,
       }
