@@ -779,6 +779,7 @@ require('lazy').setup({
         html = { 'prettier' },
         javascript = { 'prettier' },
         css = { 'prettier' },
+        latex = { 'latexindent' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -788,6 +789,11 @@ require('lazy').setup({
       formatters = {
         prettier = {
           prepend_args = { '--no-insert-final-newline' },
+        },
+        latexindent = {
+          command = 'latexindent',
+          args = { '-l', '-w' }, -- use local config, overwrite file
+          stdin = false, -- latexindent doesn’t read from stdin
         },
       },
     },
@@ -815,16 +821,17 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
+          -- {
+          --   'rafamadriz/friendly-snippets',
+          --   config = function()
+          --     require('luasnip.loaders.from_vscode').lazy_load()
+          --   end,
+          -- },
         },
         opts = {},
         config = function()
           require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets' }
+          require('luasnip').config.setup { enable_autosnippets = true }
         end,
       },
       'folke/lazydev.nvim',
@@ -894,7 +901,6 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -911,8 +917,9 @@ require('lazy').setup({
         },
         on_colors = function(colors)
           --colors.bg = '#1a1b26'
-          colors.bg = '#15161e'
-          --colors.bg = '#100000'
+          --colors.bg = '#15161e'
+          --colors.bg = '#12131b'
+          colors.bg = '#000000'
         end,
       }
 
@@ -969,11 +976,27 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'rust', 'python', 'go' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'rust',
+        'python',
+        'go',
+      },
       -- Autoinstall languages that are not installed
-      auto_install = true,
+      auto_install = false,
       highlight = {
         enable = true,
+        disable = { 'latex' },
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
